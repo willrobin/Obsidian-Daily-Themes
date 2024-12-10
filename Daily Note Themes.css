@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-                     Daily Note Themes by CyanVoxel v1.0.5
+                     Daily Note Themes by CyanVoxel v1.0.6 (Von Robin Will Modifiziert / Deutsche Wochentage hinzugefügt)
 
 These are a set of 7 main CSS classes that can be used to apply individual color
 schemes to daily notes for each day of the week.
@@ -12,9 +12,18 @@ change or remove those font-family lines from this snippet.
                 
 ------------------------------------------------------------------------------*/
 :root {
-  --highlight: #ffffff;
+  --highlight: #000000;
   --primary: #aaaaaa;
   --dark: #333333;
+  --contrast: #FFFFFF;
+
+}
+
+:root .theme-dark  {
+  --highlight: #ffffff;
+  --primary: rgba(255, 255, 255, 0.05);
+  --dark: #333333;
+  --contrast: #FFFFFF;
 }
 
 .daily {
@@ -40,44 +49,44 @@ change or remove those font-family lines from this snippet.
   --list-marker-color: var(--highlight);
   --code-background: black;
   --code-normal: var(--primary);
-
+  
   --background-modifier-border-focus: var(--primary);
   --background-modifier-border: color-mix(in srgb, var(--highlight) 60%, transparent);
   --background-modifier-hover: color-mix(in srgb, var(--highlight) 60%, transparent);
   --pill-cover-hover: color-mix(in srgb, var(--highlight) 60%, transparent);
 }
 
-.sunday, .Sunday {
+.sunday, .Sunday, .sonntag, .Sonntag {
   --highlight: #f39caa;
   --primary: #f6466f;
   --dark: #2d0916;
 }
-.monday, .Monday {
+.monday, .Monday, .montag, .Montag {
   --highlight: #fcadaa;
   --primary: #f65848;
   --dark: #3c0e0b;
 }
-.tuesday, .Tuesday {
+.tuesday, .Tuesday, .dienstag, .Dienstag {
   --highlight: #aedbfa;
   --primary: #3b87f0;
   --dark: #070615;
 }
-.wednesday, .Wednesday {
+.wednesday, .Wednesday, .mittwoch, .Mittwoch {
   --highlight: #fff3c4;
   --primary: #ffd63d;
   --dark: #2c1404;
 }
-.thursday, .Thursday {
+.thursday, .Thursday, .donnerstag, .Donnerstag {
   --highlight: #f7b79b;
   --primary: #ed6022;
   --dark: #210b04;
 }
-.friday, .Friday {
+.friday, .Friday, .freitag, .Freitag {
   --highlight: #e9f9b7;
   --primary: #92e649;
   --dark: #192108;
 }
-.saturday, .Saturday{
+.saturday, .Saturday, .samstag, .Samstag {
   --highlight: #f39caa;
   --primary: #e22c3c;
   --dark: #100305;
@@ -88,13 +97,14 @@ change or remove those font-family lines from this snippet.
   text-align: center;
   font-size: 60px;
   font-family: "Bai Jamjuree", "JetBrainsMono Nerd Font Mono", "JetBrains Mono";
+  font-weight: bolder; /* Nachträglich hinzugefügt */
   padding: 0 !important;
 }
 .daily :is(h2, .HyperMD-header.HyperMD-header-2) {
   color: var(--highlight);
   text-align: center;
   font-size: 30px;
-  font-family: "Bai Jamjuree", "JetBrainsMono Nerd Font Mono", "JetBrains Mono";
+  font-family: "Bevellier", "Bai Jamjuree", "JetBrainsMono Nerd Font Mono", "JetBrains Mono";
   font-style: italic;
   padding: 0 !important;
 }
@@ -103,7 +113,7 @@ change or remove those font-family lines from this snippet.
   text-align: center;
 
   font-size: 32px;
-  font-family: "Bai Jamjuree", "JetBrainsMono Nerd Font Mono", "JetBrains Mono";
+  font-family:"Bevellier", "Bai Jamjuree", "JetBrainsMono Nerd Font Mono", "JetBrains Mono";
   padding-top: 0;
 }
 .daily :is(h4, .HyperMD-header.HyperMD-header-4) {
@@ -144,14 +154,40 @@ change or remove those font-family lines from this snippet.
   margin-right: auto !important;
 }
 
-:is(.sunday, .Sunday,
-.monday, .Monday,
-.tuesday, .Tuesday,
-.wednesday, .Wednesday,
-.thursday, .Thursday,
-.friday, .Friday,
-.saturday, .Saturday
+:is(.sunday, .Sunday, .sonntag, .Sonntag,
+.monday, .Monday, .montag, .Montag,
+.tuesday, .Tuesday, .dienstag, .Dienstag,
+.wednesday, .Wednesday, .mittwoch, .Mittwoch,
+.thursday, .Thursday, .donnerstag, .Donnerstag,
+.friday, .Friday, .freitag, .Freitag,
+.saturday, .Saturday, .samstag, .Samstag,
   )
   svg {
   color: color-mix(in srgb, var(--highlight) 60%, transparent);
+}
+
+/* Dataview Farbe */
+.daily .cm-html-embed th, .daily .markdown-rendered th {
+  color: var(--primary) !important;
+}
+
+.daily.cm-html-embed th, .daily.markdown-rendered th {
+  color: var(--primary) !important;
+}
+
+/* Inline Title */
+.daily .inline-title {
+  color: var(--highlight) !important;
+}
+
+/* DATAVIEW INLINE FIELD */
+.daily .dataview.inline-field-key {
+  background-color: var(--primary);
+  color: var(--dark);
+}
+
+.daily .dataview.inline-field-value {
+  border-radius: 0em 0.5em 0.5em 0em;
+  background-color: var(--highlight);
+  color: var(--dark);
 }
