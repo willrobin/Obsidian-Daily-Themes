@@ -1,104 +1,174 @@
 /*------------------------------------------------------------------------------
-                     Daily Note Themes by CyanVoxel v1.0.6 (Von Robin Will Modifiziert / Deutsche Wochentage hinzugefügt)
+Based on: Daily Note Themes by CyanVoxel v1.0.5 
+v1.0.7 (Modified by Robin Will)
 
 These are a set of 7 main CSS classes that can be used to apply individual color
 schemes to daily notes for each day of the week.
-To customize the colors for each day, just swamp out the colors values under
+To customize the colors for each day, just swap out the color values under
 the main "day of the week" classes.
 
 NOTE: By default, this snippet relies on the "Bai Jamjuree" or
 "JetBrainsMono Nerd Font Mono" fonts. If you don't wish to use these, then just
 change or remove those font-family lines from this snippet.
-                
 ------------------------------------------------------------------------------*/
+
+/* Root Variables: Define default colors used across themes */
 :root {
-  --highlight: #000000;
-  --primary: #aaaaaa;
-  --dark: #333333;
-  --contrast: #FFFFFF;
-
+  --highlight: #000000; /* Primary text or highlight color */
+  --primary: #aaaaaa; /* Muted color for secondary elements */
+  --dark-base: #333333; /* Base color for dark */
+  --dark-opacity: 1; /* Default opacity for dark */
+  --dark: rgba(51, 51, 51, var(--dark-opacity)); /* Computed dark color with adjustable opacity */
+  --contrast: #FFFFFF; /* High contrast text color */
 }
 
-:root .theme-dark  {
+/* Dark Theme Variables: Applied when Obsidian is in dark mode */
+.theme-dark {
   --highlight: #ffffff;
-  --primary: rgba(255, 255, 255, 0.05);
-  --dark: #333333;
+  --primary: #ffffff;
+  --dark-base: #333333;
+  --dark-opacity: 1;
+  --dark: rgba(51, 51, 51, var(--dark-opacity));
   --contrast: #FFFFFF;
 }
 
-.daily {
-  --dark: var(--dark);
-  color: var(--highlight);
-  background-color: var(--dark);
-  --text-normal: var(--highlight);
-  --text-muted: var(--highlight);
-  --text-faint: var(--highlight);
-  --checklist-done-color: var(--highlight);
-  --metadata-label-text-color: var(--highlight);
-  --metadata-input-text-color: var(--highlight);
-  --tag-color: var(--dark);
-  --tag-background: var(--primary);
-  --hr-color: var(--primary);
-  --blockquote-border-color: var(--primary);
-  --interactive-accent: var(--primary);
-  --collapse-icon-color-collapsed: var(--primary);
-  --checkbox-color: var(--primary);
-  --checkbox-marker-color: var(--dark);
-  --checkbox-color-hover: var(--highlight);
-  --checkbox-border-color: var(--highlight);
-  --list-marker-color: var(--highlight);
-  --code-background: black;
-  --code-normal: var(--primary);
-  
-  --background-modifier-border-focus: var(--primary);
-  --background-modifier-border: color-mix(in srgb, var(--highlight) 60%, transparent);
-  --background-modifier-hover: color-mix(in srgb, var(--highlight) 60%, transparent);
-  --pill-cover-hover: color-mix(in srgb, var(--highlight) 60%, transparent);
+/* Light Theme Variables: Applied when Obsidian is in light mode */
+.theme-light {
+  --highlight: #333333; /* Swapped with dark */
+  --primary: #000000; /* Swapped with highlight */
+  --dark-base: #aaaaaa; /* Swapped base color for light mode */
+  --dark-opacity: 0.1; /* Adjust opacity for light mode */
+  --dark: rgba(170, 170, 170, var(--dark-opacity)); /* Computed dark color with adjustable opacity */
+  --contrast: #000000;
 }
 
-.sunday, .Sunday, .sonntag, .Sonntag {
+/* Base Styles for Daily Notes */
+.daily {
+  color: var(--highlight); /* Text color */
+  --bold-color: var(--primary);
+  --italic-color: var(--primary);
+  background-color: var(--dark); /* Background color */
+  --text-normal: var(--highlight); /* Standard text color */
+  --text-muted: var(--highlight); /* Muted text color */
+  --text-faint: var(--highlight); /* Fainter text color */
+  --checklist-done-color: var(--highlight); /* Checklist completed state */
+  --metadata-label-text-color: var(--highlight); /* Metadata label color */
+  --metadata-input-text-color: var(--highlight); /* Metadata input color */
+  --tag-color: var(--dark); /* Tag text color */
+  --tag-background: var(--primary); /* Tag background color */
+  --hr-color: var(--primary); /* Horizontal rule color */
+  --blockquote-border-color: var(--primary); /* Border for blockquotes */
+  --interactive-accent: var(--primary); /* Accent color for interactive elements */
+  --collapse-icon-color-collapsed: var(--primary); /* Collapsed state icon color */
+  --checkbox-color: var(--primary); /* Checkbox color */
+  --checkbox-marker-color: var(--dark); /* Checkbox marker color */
+  --checkbox-color-hover: var(--highlight); /* Hover state for checkboxes */
+  --checkbox-border-color: var(--highlight); /* Checkbox border color */
+  --list-marker-color: var(--highlight); /* List marker color */
+  --code-background: black; /* Code block background */
+  --code-normal: var(--primary); /* Code text color */
+  --background-modifier-border-focus: var(--primary); /* Focus border color */
+  --background-modifier-border: color-mix(in srgb, var(--highlight) 60%, transparent); /* Border mix */
+  --background-modifier-hover: color-mix(in srgb, var(--highlight) 60%, transparent); /* Hover background */
+  --pill-cover-hover: color-mix(in srgb, var(--highlight) 60%, transparent); /* Hover for pill-shaped elements */
+}
+
+/* Day-Specific Styles for Dark Mode */
+.theme-dark .daily.sunday, .theme-dark .daily.Sunday, .theme-dark .daily.sonntag, .theme-dark .daily.Sonntag {
   --highlight: #f39caa;
   --primary: #f6466f;
-  --dark: #2d0916;
+  --dark-base: #2d0916;
+  --dark: rgba(45, 9, 22, var(--dark-opacity));
 }
-.monday, .Monday, .montag, .Montag {
+.theme-dark .daily.monday, .theme-dark .daily.Monday, .theme-dark .daily.montag, .theme-dark .daily.Montag {
   --highlight: #fcadaa;
   --primary: #f65848;
-  --dark: #3c0e0b;
+  --dark-base: #3c0e0b;
+  --dark: rgba(60, 14, 11, var(--dark-opacity));
 }
-.tuesday, .Tuesday, .dienstag, .Dienstag {
+.theme-dark .daily.tuesday, .theme-dark .daily.Tuesday, .theme-dark .daily.dienstag, .theme-dark .daily.Dienstag {
   --highlight: #aedbfa;
   --primary: #3b87f0;
-  --dark: #070615;
+  --dark-base: #070615;
+  --dark: rgba(7, 6, 21, var(--dark-opacity));
 }
-.wednesday, .Wednesday, .mittwoch, .Mittwoch {
+.theme-dark .daily.wednesday, .theme-dark .daily.Wednesday, .theme-dark .daily.mittwoch, .theme-dark .daily.Mittwoch {
   --highlight: #fff3c4;
   --primary: #ffd63d;
-  --dark: #2c1404;
+  --dark-base: #2c1404;
+  --dark: rgba(44, 20, 4, var(--dark-opacity));
 }
-.thursday, .Thursday, .donnerstag, .Donnerstag {
+.theme-dark .daily.thursday, .theme-dark .daily.Thursday, .theme-dark .daily.donnerstag, .theme-dark .daily.Donnerstag {
   --highlight: #f7b79b;
   --primary: #ed6022;
-  --dark: #210b04;
+  --dark-base: #210b04;
+  --dark: rgba(33, 11, 4, var(--dark-opacity));
 }
-.friday, .Friday, .freitag, .Freitag {
+.theme-dark .daily.friday, .theme-dark .daily.Friday, .theme-dark .daily.freitag, .theme-dark .daily.Freitag {
   --highlight: #e9f9b7;
   --primary: #92e649;
-  --dark: #192108;
+  --dark-base: #192108;
+  --dark: rgba(25, 33, 8, var(--dark-opacity));
 }
-.saturday, .Saturday, .samstag, .Samstag {
+.theme-dark .daily.saturday, .theme-dark .daily.Saturday, .theme-dark .daily.samstag, .theme-dark .daily.Samstag {
   --highlight: #f39caa;
   --primary: #e22c3c;
-  --dark: #100305;
+  --dark-base: #100305;
+  --dark: rgba(16, 3, 5, var(--dark-opacity));
 }
 
+/* Day-Specific Styles for Light Mode */
+.theme-light .daily.sunday, .theme-light .daily.Sunday, .theme-light .daily.sonntag, .theme-light .daily.Sonntag {
+  --highlight: #2d0916;
+  --primary: #f6466f; /*#f39caa;*/
+  --dark-base: #f6466f;
+  --dark: rgba(246, 70, 111, var(--dark-opacity));
+}
+.theme-light .daily.monday, .theme-light .daily.Monday, .theme-light .daily.montag, .theme-light .daily.Montag {
+  --highlight: #3c0e0b;
+  --primary: #F65848; /* #fcadaa; */
+  --dark-base: #f65848;
+  --dark: rgba(246, 88, 72, var(--dark-opacity));
+}
+.theme-light .daily.tuesday, .theme-light .daily.Tuesday, .theme-light .daily.dienstag, .theme-light .daily.Dienstag {
+  --highlight: #070615;
+  --primary: #3B87F0; /* #aedbfa; */
+  --dark-base: #3b87f0;
+  --dark: rgba(59, 135, 240, var(--dark-opacity));
+}
+.theme-light .daily.wednesday, .theme-light .daily.Wednesday, .theme-light .daily.mittwoch, .theme-light .daily.Mittwoch {
+  --highlight: #2c1404;
+  --primary: #b09000; /* #fff3c4; */
+  --dark-base: #ffd63d;
+  --dark: rgba(255, 214, 61, var(--dark-opacity));
+}
+.theme-light .daily.thursday, .theme-light .daily.Thursday, .theme-light .daily.donnerstag, .theme-light .daily.Donnerstag {
+  --highlight: #210b04;
+  --primary: #ed6022; /* #f7b79b; */
+  --dark-base: #ed6022;
+  --dark: rgba(237, 96, 34, var(--dark-opacity));
+}
+.theme-light .daily.friday, .theme-light .daily.Friday, .theme-light .daily.freitag, .theme-light .daily.Freitag {
+  --highlight: #192108;
+  --primary: #50a700; /* #e9f9b7; */
+  --dark-base: #92e649;
+  --dark: rgba(146, 230, 73, var(--dark-opacity));
+}
+.theme-light .daily.saturday, .theme-light .daily.Saturday, .theme-light .daily.samstag, .theme-light .daily.Samstag {
+  --highlight: #100305;
+  --primary: #E22C3C; /* #f39caa; */
+  --dark-base: #e22c3c;
+  --dark: rgba(226, 44, 60, var(--dark-opacity));
+}
+
+/* Header Styles: Customization for headers in daily notes */
 .daily :is(h1, .HyperMD-header.HyperMD-header-1) {
-  color: var(--primary);
-  text-align: center;
-  font-size: 60px;
-  font-family: "Bai Jamjuree", "JetBrainsMono Nerd Font Mono", "JetBrains Mono";
-  font-weight: bolder; /* Nachträglich hinzugefügt */
-  padding: 0 !important;
+  color: var(--primary); /* Header color */
+  text-align: center; /* Center alignment */
+  font-size: 50px; /* Font size */
+  font-family: "Bevellier", "Bai Jamjuree", "JetBrainsMono Nerd Font Mono", "JetBrains Mono"; /* Font family */
+  font-weight: bolder; /* Bold weight */
+  padding: 0 !important; /* Remove padding */
 }
 .daily :is(h2, .HyperMD-header.HyperMD-header-2) {
   color: var(--highlight);
@@ -111,81 +181,61 @@ change or remove those font-family lines from this snippet.
 .daily :is(h3, .HyperMD-header.HyperMD-header-3) {
   color: var(--primary);
   text-align: center;
-
   font-size: 32px;
-  font-family:"Bevellier", "Bai Jamjuree", "JetBrainsMono Nerd Font Mono", "JetBrains Mono";
+  font-family: "Bevellier", "Bai Jamjuree", "JetBrainsMono Nerd Font Mono", "JetBrains Mono";
   padding-top: 0;
 }
-.daily :is(h4, .HyperMD-header.HyperMD-header-4) {
-  background-color: var(--primary);
-  color: var(--dark);
-  /* border-color: var(--primary); */
-  /* font-family: "JetBrainsMono Nerd Font Mono", "JetBrains Mono", monospace; */
-  font-weight: 900;
-  margin-bottom: 0;
-  padding-top: 0;
-  font-size: 20px;
-  width: fit-content;
-  padding-left: 6px;
-  padding-right: 6px;
-  /* border: solid; */
-  border-radius: 8px;
-  /* border-width: 2px; */
-  word-wrap: normal;
-}
-.daily p {
-  margin-top: 4px;
-  margin-bottom: 4px;
-}
+
+/* Link Styles: Default and hover states */
 .daily :is(a:link, .cm-hmd-internal-link) {
   color: var(--primary);
 }
 .daily :is(a:hover, .cm-hmd-internal-link:hover) {
   color: var(--highlight);
 }
+
+/* Divider Styles: Margins for horizontal rules */
 .daily hr {
   margin-top: 20px !important;
   margin-bottom: 20px !important;
 }
 
+/* Image Styles: Center alignment */
 .daily img {
   display: block !important;
   margin-left: auto !important;
   margin-right: auto !important;
 }
 
-:is(.sunday, .Sunday, .sonntag, .Sonntag,
-.monday, .Monday, .montag, .Montag,
-.tuesday, .Tuesday, .dienstag, .Dienstag,
-.wednesday, .Wednesday, .mittwoch, .Mittwoch,
-.thursday, .Thursday, .donnerstag, .Donnerstag,
-.friday, .Friday, .freitag, .Freitag,
-.saturday, .Saturday, .samstag, .Samstag,
-  )
-  svg {
+/* SVG Styling for Day-Specific Elements */
+:is(.daily.sunday, .daily.Sunday, .daily.sonntag, .daily.Sonntag,
+.daily.monday, .daily.Monday, .daily.montag, .daily.Montag,
+.daily.tuesday, .daily.Tuesday, .daily.dienstag, .daily.Dienstag,
+.daily.wednesday, .daily.Wednesday, .daily.mittwoch, .daily.Mittwoch,
+.daily.thursday, .daily.Thursday, .daily.donnerstag, .daily.Donnerstag,
+.daily.friday, .daily.Friday, .daily.freitag, .daily.Freitag,
+.daily.saturday, .daily.Saturday, .daily.samstag, .daily.Samstag) svg {
   color: color-mix(in srgb, var(--highlight) 60%, transparent);
 }
 
-/* Dataview Farbe */
+/* Dataview Table Header Colors */
 .daily .cm-html-embed th, .daily .markdown-rendered th {
   color: var(--primary) !important;
 }
-
 .daily.cm-html-embed th, .daily.markdown-rendered th {
   color: var(--primary) !important;
 }
 
-/* Inline Title */
+/* Inline Title: Highlight for inline elements */
 .daily .inline-title {
   color: var(--highlight) !important;
 }
 
-/* DATAVIEW INLINE FIELD */
+/* Dataview Inline Fields: Key-Value Styling */
 .daily .dataview.inline-field-key {
   background-color: var(--primary);
   color: var(--dark);
 }
-
 .daily .dataview.inline-field-value {
   border-radius: 0em 0.5em 0.5em 0em;
   background-color: var(--highlight);
